@@ -21,4 +21,14 @@ class Recommendation extends Model
         return $this->hasMany('App\RecommendationItem');
     }
 
+    public function genres()
+    {
+        return $this->belongsToMany('App\Genre');
+    }
+
+    public function keywords()
+    {
+        return $this->belongsToMany('App\Keyword');
+    }
+
 }

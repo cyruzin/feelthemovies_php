@@ -43,3 +43,15 @@ $factory->define(App\RecommendationItem::class, function (Faker\Generator $faker
         'commentary' => $faker->text($maxNbChars = 500)
     ];
 });
+
+$factory->define(App\Genre::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name
+    ];
+});
+
+$factory->define(App\Keyword::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name
+    ];
+});

@@ -17,21 +17,38 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'api/v1', 'middleware' => 'auth'], function () use ($router) {
 
+    // Users Routes
     $router->get('/users', 'UserController@index');
     $router->get('/user/{id}', 'UserController@show');
     $router->post('/user', 'UserController@store');
     $router->put('/user/{id}', 'UserController@update');
     $router->delete('/user/{id}', 'UserController@delete');
 
+    // Recommendations Routes
     $router->get('/recommendations', 'RecommendationController@index');
     $router->get('/recommendation/{id}', 'RecommendationController@show');
     $router->post('/recommendation', 'RecommendationController@store');
     $router->put('/recommendation/{id}', 'RecommendationController@update');
     $router->delete('/recommendation/{id}', 'RecommendationController@delete');
 
+    // Recommendation Items Routes
     $router->get('/recommendation_items/{id}', 'RecommendationItemController@show');
     $router->post('/recommendation_items', 'RecommendationItemController@store');
     $router->put('/recommendation_items/{id}', 'RecommendationItemController@update');
     $router->delete('/recommendation_items/{id}', 'RecommendationItemController@delete');
+
+    // Genres Routes
+    $router->get('/genres', 'GenreController@index');
+    $router->get('/genre/{id}', 'GenreController@show');
+    $router->post('/genre', 'GenreController@store');
+    $router->put('/genre/{id}', 'GenreController@update');
+    $router->delete('/genre/{id}', 'GenreController@delete');
+
+    // Keywords Routes
+    $router->get('/keywords', 'KeywordController@index');
+    $router->get('/keyword/{id}', 'KeywordController@show');
+    $router->post('/keyword', 'KeywordController@store');
+    $router->put('/keyword/{id}', 'KeywordController@update');
+    $router->delete('/keyword/{id}', 'KeywordController@delete');
 
 });
