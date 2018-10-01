@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\RecommendationItem;
+use ApiHelper;
 use Illuminate\Http\Request;
 
 class RecommendationItemController extends Controller
@@ -13,7 +14,7 @@ class RecommendationItemController extends Controller
         try {
             return response()->json(RecommendationItem::all()->where('recommendation_id', $id), 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
+            return ApiHelper::errorHandler($e);
         }
     }
 
@@ -31,7 +32,7 @@ class RecommendationItemController extends Controller
         try {
             return response()->json(RecommendationItem::create($request->all(), 201));
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
+            return ApiHelper::errorHandler($e);
         }
     }
 
@@ -51,7 +52,7 @@ class RecommendationItemController extends Controller
 
             return response()->json($rec, 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
+            return ApiHelper::errorHandler($e);
         }
     }
 
@@ -61,7 +62,7 @@ class RecommendationItemController extends Controller
             RecommendationItem::findOrFail($id)->delete();
             return response()->json(['message' => 'Deleted successfully'], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
+            return ApiHelper::errorHandler($e);
         }
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Genre;
+use ApiHelper;
 use Illuminate\Http\Request;
 
 class GenreController extends Controller
@@ -12,7 +13,7 @@ class GenreController extends Controller
         try {
             return response()->json(Genre::paginate(30));
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
+            return ApiHelper::errorHandler($e);
         }
     }
 
@@ -21,7 +22,7 @@ class GenreController extends Controller
         try {
             return response()->json(Genre::find($id), 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
+            return ApiHelper::errorHandler($e);
         }
     }
 
@@ -31,7 +32,7 @@ class GenreController extends Controller
         try {
             return response()->json(Genre::create($request->all(), 201));
         } catch (\Exception  $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
+            return ApiHelper::errorHandler($e);
         }
     }
 
@@ -45,7 +46,7 @@ class GenreController extends Controller
 
             return response()->json($rec, 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
+            return ApiHelper::errorHandler($e);
         }
     }
 
@@ -55,7 +56,7 @@ class GenreController extends Controller
             Genre::findOrFail($id)->delete();
             return response()->json(['message' => 'Deleted successfully'], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
+            return ApiHelper::errorHandler($e);
         }
     }
 }

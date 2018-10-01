@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Recommendation;
+use ApiHelper;
 use Illuminate\Http\Request;
 
 class RecommendationController extends Controller
@@ -12,7 +13,7 @@ class RecommendationController extends Controller
         try {
             return response()->json(Recommendation::all()->sortByDesc('id')->take(30));
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
+            return ApiHelper::errorHandler($e);
         }
     }
 
@@ -21,7 +22,7 @@ class RecommendationController extends Controller
         try {
             return response()->json(Recommendation::find($id), 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
+            return ApiHelper::errorHandler($e);
         }
     }
 
@@ -36,7 +37,7 @@ class RecommendationController extends Controller
         try {
             return response()->json(Recommendation::create($request->all(), 201));
         } catch (\Exception  $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
+            return ApiHelper::errorHandler($e);
         }
     }
 
@@ -55,7 +56,7 @@ class RecommendationController extends Controller
 
             return response()->json($rec, 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
+            return ApiHelper::errorHandler($e);
         }
     }
 
@@ -65,7 +66,7 @@ class RecommendationController extends Controller
             Recommendation::findOrFail($id)->delete();
             return response()->json(['message' => 'Deleted successfully'], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
+            return ApiHelper::errorHandler($e);
         }
     }
 

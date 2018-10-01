@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use ApiHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -13,7 +14,7 @@ class UserController extends Controller
         try {
             return response()->json(User::paginate(30));
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
+            return ApiHelper::errorHandler($e);
         }
     }
 
@@ -22,7 +23,7 @@ class UserController extends Controller
         try {
             return response()->json(User::find($id), 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
+            return ApiHelper::errorHandler($e);
         }
     }
 
@@ -46,7 +47,7 @@ class UserController extends Controller
 
             return response()->json($user, 201);
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
+            return ApiHelper::errorHandler($e);
         }
     }
 
@@ -64,7 +65,7 @@ class UserController extends Controller
 
             return response()->json($rec, 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
+            return ApiHelper::errorHandler($e);
         }
     }
 
@@ -74,7 +75,7 @@ class UserController extends Controller
             User::findOrFail($id)->delete();
             return response()->json(['message' => 'Deleted successfully'], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 400);
+            return ApiHelper::errorHandler($e);
         }
     }
 
