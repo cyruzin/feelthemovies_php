@@ -34,8 +34,22 @@ class RecommendationController extends Controller
             'body' => 'required',
             'backdrop' => 'required'
         ]);
+
         try {
-            return response()->json(Recommendation::create($request->all(), 201));
+            $rec = Recommendation::create($request->all());
+
+            $genres = array_filter($request->genres);
+            $keywords = array_filter($request->keywords);
+
+            if (!empty($genres)) {
+                $rec->genres()->attach($request->genres);
+            }
+
+            if (!empty($keywords)) {
+                $rec->keywords()->attach($request->keywords);
+            }
+
+            return response()->json($rec, 201);
         } catch (\Exception  $e) {
             return ApiHelper::errorHandler($e);
         }
