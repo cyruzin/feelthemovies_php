@@ -17,7 +17,9 @@ class RecommendationItemController extends Controller
     public function index($id)
     {
         try {
-            return response()->json(RecommendationItem::all()->where('recommendation_id', $id), 200);
+            return response()->json(RecommendationItem::with('sources')
+                ->get()
+                ->where('recommendation_id', $id), 200);
         } catch (\Exception $e) {
             return ApiHelper::errorHandler($e);
         }
@@ -63,6 +65,8 @@ class RecommendationItemController extends Controller
                 $recItem->sources()->attach($request->sources);
             }
 
+            $recItem = RecommendationItem::with('sources')->findOrFail($recItem->id);
+
             return response()->json($recItem, 201);
         } catch (\Exception $e) {
             return ApiHelper::errorHandler($e);
@@ -95,6 +99,8 @@ class RecommendationItemController extends Controller
             if (!empty($sources)) {
                 $recItem->sources()->sync($request->sources);
             }
+
+            $recItem = RecommendationItem::with('sources')->findOrFail($id);
 
             return response()->json($recItem, 200);
         } catch (\Exception $e) {

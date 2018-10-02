@@ -16,7 +16,7 @@ class SearchController extends Controller
         $genres = (!empty($request->genres)) ? array_filter($request->genres) : '';
 
         if (empty($search) && empty($keywords) && empty($genres)) {
-            return response()->json(['message' => 'All fields are empty'], 400);
+            return response()->json(['data' => []], 400);
         }
 
         try {

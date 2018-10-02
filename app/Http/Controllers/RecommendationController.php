@@ -68,6 +68,8 @@ class RecommendationController extends Controller
                 $rec->keywords()->attach($request->keywords);
             }
 
+            $rec = Recommendation::with(['keywords', 'genres'])->findOrFail($rec->id);
+
             return response()->json($rec, 201);
         } catch (\Exception  $e) {
             return ApiHelper::errorHandler($e);
@@ -106,6 +108,9 @@ class RecommendationController extends Controller
             if (!empty($keywords)) {
                 $rec->keywords()->sync($request->keywords);
             }
+
+            $rec = Recommendation::with(['keywords', 'genres'])->findOrFail($id);
+
 
             return response()->json($rec, 200);
         } catch (\Exception $e) {
