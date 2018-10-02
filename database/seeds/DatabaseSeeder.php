@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call('UsersTableSeeder');
         $this->call('GenresTableSeeder');
         $this->call('KeywordsTableSeeder');
+        $this->call('SourcesTableSeeder');
         $this->call('RecommendationsTableSeeder');
         $this->call('RecommendationItemsTableSeeder');
     }

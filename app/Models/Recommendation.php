@@ -16,7 +16,7 @@ class Recommendation extends Model
         'title', 'body', 'backdrop', 'status', 'user_id'
     ];
 
-    public function recommendation_items()
+    public function items()
     {
         return $this->hasMany('App\RecommendationItem');
     }

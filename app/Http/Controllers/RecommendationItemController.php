@@ -30,7 +30,15 @@ class RecommendationItemController extends Controller
         ]);
 
         try {
-            return response()->json(RecommendationItem::create($request->all(), 201));
+            $recItem = RecommendationItem::create($request->all());
+
+            $sources = array_filter($request->sources);
+
+            if (!empty($sources)) {
+                $recItem->sources()->attach($request->sources);
+            }
+
+            return response()->json($recItem, 201);
         } catch (\Exception $e) {
             return ApiHelper::errorHandler($e);
         }

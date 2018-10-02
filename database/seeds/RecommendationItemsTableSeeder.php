@@ -11,6 +11,8 @@ class RecommendationItemsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\RecommendationItem::class, 100)->create();
+        factory(App\RecommendationItem::class, 100)->create()->each(function ($a) {
+            $a->sources()->attach(App\Source::all()->random()->id);
+        });
     }
 }

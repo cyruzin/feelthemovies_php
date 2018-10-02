@@ -7,11 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class RecommendationItem extends Model
 {
 
-    public function recommendations()
-    {
-        return $this->belongsTo('App\Recommendation');
-    }
-
     /**
      * The attributes that are mass assignable.
      *
@@ -31,5 +26,10 @@ class RecommendationItem extends Model
     public function recommendation()
     {
         return $this->belongsTo('App\Recommendation');
+    }
+
+    public function sources()
+    {
+        return $this->belongsToMany('App\Source');
     }
 }

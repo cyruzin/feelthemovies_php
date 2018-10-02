@@ -51,4 +51,11 @@ $router->group(['prefix' => 'api/v1', 'middleware' => 'auth'], function () use (
     $router->put('/keyword/{id}', 'KeywordController@update');
     $router->delete('/keyword/{id}', 'KeywordController@delete');
 
+    // Sources Routes
+    $router->get('/sources', 'SourceController@index');
+    $router->get('/source/{id}', 'SourceController@show');
+    $router->post('/source', 'SourceController@store');
+    $router->put('/source/{id}', 'SourceController@update');
+    $router->delete('/source/{id}', 'SourceController@delete');
+
 });

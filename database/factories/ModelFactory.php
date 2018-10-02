@@ -55,3 +55,9 @@ $factory->define(App\Keyword::class, function (Faker\Generator $faker) {
         'name' => $faker->name
     ];
 });
+
+$factory->define(App\Source::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name
+    ];
+});
