@@ -14,6 +14,9 @@ class Keyword extends Model
      */
     protected $fillable = ['name'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function recommendations()
     {
         return $this->belongsToMany('App\Recommendation');

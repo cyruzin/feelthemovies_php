@@ -27,6 +27,7 @@ $factory->define(App\Recommendation::class, function (Faker\Generator $faker) {
         'user_id' => $faker->numberBetween($min = 1, $max = 50),
         'title' => $faker->sentence($nbWords = 6, $variableNbWords = true),
         'body' => $faker->text($maxNbChars = 200),
+        'poster' => str_random(20),
         'backdrop' => str_random(20)
     ];
 });
@@ -37,7 +38,7 @@ $factory->define(App\RecommendationItem::class, function (Faker\Generator $faker
         'name' => $faker->name,
         'year' => $faker->date($format = 'Y-m-d', $max = 'now'),
         'overview' => $faker->text($maxNbChars = 400),
-        'poster' => $faker->text($maxNbChars = 20),
+        'poster' => str_random(20),
         'backdrop' => str_random(20),
         'trailer' => str_random(20),
         'commentary' => $faker->text($maxNbChars = 500)

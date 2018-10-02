@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
     public function index()
     {
         try {
@@ -18,15 +22,26 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
     public function show($id)
     {
         try {
-            return response()->json(User::find($id), 200);
+            return response()->json(User::findOrFail($id), 200);
         } catch (\Exception $e) {
             return ApiHelper::errorHandler($e);
         }
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     * @throws \Exception
+     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -51,6 +66,13 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     * @throws \Exception
+     */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -69,6 +91,11 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
     public function delete($id)
     {
         try {

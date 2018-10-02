@@ -23,11 +23,17 @@ class RecommendationItem extends Model
         'commentary'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function recommendation()
     {
         return $this->belongsTo('App\Recommendation');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function sources()
     {
         return $this->belongsToMany('App\Source');

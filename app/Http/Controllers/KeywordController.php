@@ -30,7 +30,7 @@ class KeywordController extends Controller
     public function show($id)
     {
         try {
-            return response()->json(Keyword::find($id), 200);
+            return response()->json(Keyword::findOrFail($id), 200);
         } catch (\Exception $e) {
             return ApiHelper::errorHandler($e);
         }

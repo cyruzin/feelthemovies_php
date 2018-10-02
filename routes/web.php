@@ -32,7 +32,8 @@ $router->group(['prefix' => 'api/v1', 'middleware' => 'auth'], function () use (
     $router->delete('/recommendation/{id}', 'RecommendationController@delete');
 
     // Recommendation Items Routes
-    $router->get('/recommendation_items/{id}', 'RecommendationItemController@show');
+    $router->get('/recommendation_items/{id}', 'RecommendationItemController@index');
+    $router->get('/recommendation_item/{id}', 'RecommendationItemController@show');
     $router->post('/recommendation_items', 'RecommendationItemController@store');
     $router->put('/recommendation_items/{id}', 'RecommendationItemController@update');
     $router->delete('/recommendation_items/{id}', 'RecommendationItemController@delete');

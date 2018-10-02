@@ -30,7 +30,7 @@ class SourceController extends Controller
     public function show($id)
     {
         try {
-            return response()->json(Source::find($id), 200);
+            return response()->json(Source::findOrFail($id), 200);
         } catch (\Exception $e) {
             return ApiHelper::errorHandler($e);
         }

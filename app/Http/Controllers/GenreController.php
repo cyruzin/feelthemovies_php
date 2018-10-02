@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class GenreController extends Controller
 {
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
     public function index()
     {
         try {
@@ -17,15 +21,26 @@ class GenreController extends Controller
         }
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
     public function show($id)
     {
         try {
-            return response()->json(Genre::find($id), 200);
+            return response()->json(Genre::findOrFail($id), 200);
         } catch (\Exception $e) {
             return ApiHelper::errorHandler($e);
         }
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     * @throws \Exception
+     */
     public function store(Request $request)
     {
         $this->validate($request, ['name' => 'required']);
@@ -36,6 +51,13 @@ class GenreController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     * @throws \Exception
+     */
     public function update(Request $request, $id)
     {
         $this->validate($request, ['name' => 'required']);
@@ -50,6 +72,11 @@ class GenreController extends Controller
         }
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
     public function delete($id)
     {
         try {

@@ -14,6 +14,9 @@ class Source extends Model
      */
     protected $fillable = ['name'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function items()
     {
         return $this->belongsToMany('App\RecommendationItem');
