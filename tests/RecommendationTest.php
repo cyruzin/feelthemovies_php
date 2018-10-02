@@ -121,4 +121,16 @@ class RecommendationTest extends TestCase
         $this->json('DELETE', $this->baseUrl . '/recommendation/2?api_token=' . $this->api_token)
             ->seeJsonStructure(['message']);
     }
+
+    public function testCreateRecommendationEmptyFields()
+    {
+        $this->json('POST', $this->baseUrl . '/recommendation?api_token=' . $this->api_token, [])
+            ->seeJson([
+                'title' => ['The title field is required.'],
+                'body' => ['The body field is required.'],
+                'poster' => ['The poster field is required.'],
+                'backdrop' => ['The backdrop field is required.'],
+                'user_id' => ['The user id field is required.'],
+            ]);
+    }
 }

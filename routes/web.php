@@ -34,9 +34,9 @@ $router->group(['prefix' => 'api/v1', 'middleware' => 'auth'], function () use (
     // Recommendation Items Routes
     $router->get('/recommendation_items/{id}', 'RecommendationItemController@index');
     $router->get('/recommendation_item/{id}', 'RecommendationItemController@show');
-    $router->post('/recommendation_items', 'RecommendationItemController@store');
-    $router->put('/recommendation_items/{id}', 'RecommendationItemController@update');
-    $router->delete('/recommendation_items/{id}', 'RecommendationItemController@delete');
+    $router->post('/recommendation_item', 'RecommendationItemController@store');
+    $router->put('/recommendation_item/{id}', 'RecommendationItemController@update');
+    $router->delete('/recommendation_item/{id}', 'RecommendationItemController@delete');
 
     // Genres Routes
     $router->get('/genres', 'GenreController@index');
