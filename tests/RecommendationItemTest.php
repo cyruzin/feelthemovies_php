@@ -7,7 +7,7 @@ class RecommendationItemTest extends TestCase
     use DatabaseTransactions;
 
     protected $baseUrl = 'http://feelthemovies.test/api/v1';
-    protected $api_token = '9I0rwhz1ewHN7ULLF273KTp9nxaIOKxF';
+    protected $api_token = 'UJUBBvsIhGHyHS3w1kvYcP1jTu4POVhV';
 
     public function testGetRecommendationItemBadRequest()
     {
