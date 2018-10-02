@@ -1,13 +1,14 @@
 <?php
 
-use Laravel\Lumen\Testing\DatabaseMigrations;
 use Laravel\Lumen\Testing\DatabaseTransactions;
 
 class RecommendationTest extends TestCase
 {
-    protected $baseUrl = 'http://feelthemovies.test/api/v1';
-    protected $api_token = 'xUlN3cWuBH9VD54eq2xTgyts6tPZBNbb';
+    use DatabaseTransactions;
 
+    protected $baseUrl = 'http://feelthemovies.test/api/v1';
+    protected $api_token = '9I0rwhz1ewHN7ULLF273KTp9nxaIOKxF';
+    
     public function testGetAllRecommendations()
     {
         $this->json('GET', $this->baseUrl . '/recommendations?api_token=' . $this->api_token)
@@ -45,6 +46,7 @@ class RecommendationTest extends TestCase
             "genres" => [1, 7, 5],
             "keywords" => [4, 8, 3],
             "user_id" => 7,
+            "status" => 1,
             "api_token" => $this->api_token
         ])
             ->seeStatusCode(200);

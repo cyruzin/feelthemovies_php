@@ -16,7 +16,7 @@ class SourceController extends Controller
     public function index()
     {
         try {
-            return response()->json(Source::paginate(30));
+            return response()->json(Source::paginate(20));
         } catch (\Exception $e) {
             return ApiHelper::errorHandler($e);
         }

@@ -16,7 +16,7 @@ class KeywordController extends Controller
     public function index()
     {
         try {
-            return response()->json(Keyword::paginate(30));
+            return response()->json(Keyword::paginate(20));
         } catch (\Exception $e) {
             return ApiHelper::errorHandler($e);
         }

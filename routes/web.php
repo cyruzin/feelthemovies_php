@@ -59,4 +59,7 @@ $router->group(['prefix' => 'api/v1', 'middleware' => 'auth'], function () use (
     $router->put('/source/{id}', 'SourceController@update');
     $router->delete('/source/{id}', 'SourceController@delete');
 
+    // Search Routes
+    $router->get('/search', 'SearchController@index');
+
 });

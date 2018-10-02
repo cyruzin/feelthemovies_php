@@ -15,7 +15,7 @@ class GenreController extends Controller
     public function index()
     {
         try {
-            return response()->json(Genre::paginate(30));
+            return response()->json(Genre::paginate(20));
         } catch (\Exception $e) {
             return ApiHelper::errorHandler($e);
         }
