@@ -15,6 +15,8 @@ $router->get('/', function () use ($router) {
     return microtime();
 });
 
+$router->post('/auth', 'AuthController@index');
+
 $router->group(['prefix' => '/v1', 'middleware' => 'auth'], function () use ($router) {
 
     // Users Routes
