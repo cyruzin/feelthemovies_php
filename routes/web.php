@@ -11,6 +11,9 @@
 |
 */
 
+$router->get('/', function () use ($router) {
+    return microtime();
+});
 
 $router->group(['prefix' => '/v1', 'middleware' => 'auth'], function () use ($router) {
 
