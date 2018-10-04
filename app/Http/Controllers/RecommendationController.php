@@ -55,22 +55,22 @@ class RecommendationController extends Controller
         ]);
 
         try {
-            $rec = Recommendation::create($request->all());
+            $recommendation = Recommendation::create($request->all());
 
             $genres = array_filter($request->genres);
             $keywords = array_filter($request->keywords);
 
             if (!empty($genres)) {
-                $rec->genres()->attach($request->genres);
+                $recommendation->genres()->attach($request->genres);
             }
 
             if (!empty($keywords)) {
-                $rec->keywords()->attach($request->keywords);
+                $recommendation->keywords()->attach($request->keywords);
             }
 
-            $rec = Recommendation::with(['keywords', 'genres'])->findOrFail($rec->id);
+            $recommendation = Recommendation::with(['keywords', 'genres'])->findOrFail($recommendation->id);
 
-            return response()->json($rec, 201);
+            return response()->json($recommendation, 201);
         } catch (\Exception  $e) {
             return ApiHelper::errorHandler($e);
         }
@@ -94,25 +94,25 @@ class RecommendationController extends Controller
         ]);
 
         try {
-            $rec = Recommendation::findOrFail($id);
+            $recommendation = Recommendation::findOrFail($id);
 
-            $rec->update($request->all());
+            $recommendation->update($request->all());
 
             $genres = array_filter($request->genres);
             $keywords = array_filter($request->keywords);
 
             if (!empty($genres)) {
-                $rec->genres()->sync($request->genres);
+                $recommendation->genres()->sync($request->genres);
             }
 
             if (!empty($keywords)) {
-                $rec->keywords()->sync($request->keywords);
+                $recommendation->keywords()->sync($request->keywords);
             }
 
-            $rec = Recommendation::with(['keywords', 'genres'])->findOrFail($id);
+            $recommendation = Recommendation::with(['keywords', 'genres'])->findOrFail($id);
 
 
-            return response()->json($rec, 200);
+            return response()->json($recommendation, 200);
         } catch (\Exception $e) {
             return ApiHelper::errorHandler($e);
         }
@@ -126,6 +126,7 @@ class RecommendationController extends Controller
     public function delete($id)
     {
         try {
+
             Recommendation::findOrFail($id)->delete();
             return response()->json(['message' => 'Deleted successfully'], 200);
         } catch (\Exception $e) {

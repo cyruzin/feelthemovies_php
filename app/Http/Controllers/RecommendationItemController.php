@@ -57,17 +57,17 @@ class RecommendationItemController extends Controller
         ]);
 
         try {
-            $recItem = RecommendationItem::create($request->all());
+            $recommendationItem = RecommendationItem::create($request->all());
 
             $sources = array_filter($request->sources);
 
             if (!empty($sources)) {
-                $recItem->sources()->attach($request->sources);
+                $recommendationItem->sources()->attach($request->sources);
             }
 
-            $recItem = RecommendationItem::with('sources')->findOrFail($recItem->id);
+            $recommendationItem = RecommendationItem::with('sources')->findOrFail($recommendationItem->id);
 
-            return response()->json($recItem, 201);
+            return response()->json($recommendationItem, 201);
         } catch (\Exception $e) {
             return ApiHelper::errorHandler($e);
         }
@@ -91,18 +91,18 @@ class RecommendationItemController extends Controller
         ]);
 
         try {
-            $recItem = RecommendationItem::findOrFail($id);
-            $recItem->update($request->all());
+            $recommendationItem = RecommendationItem::findOrFail($id);
+            $recommendationItem->update($request->all());
 
             $sources = array_filter($request->sources);
 
             if (!empty($sources)) {
-                $recItem->sources()->sync($request->sources);
+                $recommendationItem->sources()->sync($request->sources);
             }
 
-            $recItem = RecommendationItem::with('sources')->findOrFail($id);
+            $recommendationItem = RecommendationItem::with('sources')->findOrFail($id);
 
-            return response()->json($recItem, 200);
+            return response()->json($recommendationItem, 200);
         } catch (\Exception $e) {
             return ApiHelper::errorHandler($e);
         }
