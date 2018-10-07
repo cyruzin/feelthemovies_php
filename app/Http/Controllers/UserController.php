@@ -75,6 +75,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required',
@@ -82,10 +83,14 @@ class UserController extends Controller
         ]);
 
         try {
-            $rec = User::findOrFail($id);
-            $rec->update($request->all());
+            $user = User::findOrFail($id);
 
-            return response()->json($rec, 200);
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->save();
+
+            return response()->json($user, 200);
         } catch (\Exception $e) {
             return ApiHelper::errorHandler($e);
         }

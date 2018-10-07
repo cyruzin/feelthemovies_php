@@ -32,7 +32,7 @@ class AuthController extends Controller
                 }
             }
 
-            return response()->json(['message' => 'authentication failed'], 401);
+            return response()->json(['message' => 'Authentication failed'], 401);
         } catch (\Exception $e) {
             return ApiHelper::errorHandler($e);
         }
