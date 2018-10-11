@@ -15,10 +15,9 @@ class RecommendationController extends Controller
     public function index()
     {
         try {
-            return response()->json(Recommendation::with(['genres', 'keywords'])
-                ->get()
+            return response()->json(['data' => [Recommendation::all()
                 ->sortByDesc('id')
-                ->take(20));
+                ->take(20)]], 200);
         } catch (\Exception $e) {
             return ApiHelper::errorHandler($e);
         }

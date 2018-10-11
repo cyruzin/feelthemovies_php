@@ -26,6 +26,7 @@ $factory->define(App\Recommendation::class, function (Faker\Generator $faker) {
     return [
         'user_id' => $faker->numberBetween($min = 1, $max = 50),
         'title' => $faker->sentence($nbWords = 6, $variableNbWords = true),
+        'type' => $faker->numberBetween($min = 0, $max = 2),
         'body' => $faker->text($maxNbChars = 200),
         'poster' => str_random(20),
         'backdrop' => str_random(20)

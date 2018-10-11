@@ -17,6 +17,7 @@ class CreateRecommendationsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('title');
+            $table->tinyInteger('type');
             $table->text('body');
             $table->string('poster');
             $table->string('backdrop');
