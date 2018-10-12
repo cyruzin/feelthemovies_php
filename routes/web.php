@@ -12,7 +12,7 @@
 */
 
 $router->get('/', function () use ($router) {
-    return microtime();
+    echo 'Feel the Movies API v1.0';
 });
 
 $router->post('/auth', 'AuthController@index');
