@@ -16,12 +16,12 @@ class SearchController extends Controller
     public function user(Request $request)
     {
         try {
-            if (empty($request->search)) {
-                return response()->json(['message' => 'Search field is empty.'], 400);
+            if (empty($request->q)) {
+                return response()->json(['message' => 'Query field is empty.'], 400);
             }
             return response()->json(
-                User::where('name', 'LIKE', '%' . $request->search . '%')
-                    ->orWhere('id', '=', $request->search)
+                User::where('name', 'LIKE', '%' . $request->q . '%')
+                    ->orWhere('id', '=', $request->q)
                     ->get()
                     ->take(20)
             );
@@ -32,7 +32,7 @@ class SearchController extends Controller
 
     public function recommendation(Request $request)
     {
-        $search = $request->search;
+        $search = $request->q;
         $keywords = (!empty($request->keywords)) ? array_filter($request->keywords) : '';
         $genres = (!empty($request->genres)) ? array_filter($request->genres) : '';
 
@@ -43,7 +43,7 @@ class SearchController extends Controller
         try {
             $rec = Recommendation::with(['keywords', 'genres']);
 
-            if (!empty($request->search)) {
+            if (!empty($search)) {
                 $rec->where('title', 'LIKE', '%' . $search . '%');
             }
 
@@ -70,11 +70,11 @@ class SearchController extends Controller
     public function genre(Request $request)
     {
         try {
-            if (empty($request->search)) {
-                return response()->json(['message' => 'Search field is empty.'], 400);
+            if (empty($request->q)) {
+                return response()->json(['message' => 'Query field is empty.'], 400);
             }
             return response()->json(
-                Genre::where('name', 'LIKE', '%' . $request->search . '%')->get()->take(20)
+                Genre::where('name', 'LIKE', '%' . $request->q . '%')->get()->take(20)
             );
         } catch (\Exception $e) {
             return ApiHelper::errorHandler($e);
@@ -84,11 +84,11 @@ class SearchController extends Controller
     public function keyword(Request $request)
     {
         try {
-            if (empty($request->search)) {
-                return response()->json(['message' => 'Search field is empty.'], 400);
+            if (empty($request->q)) {
+                return response()->json(['message' => 'Query field is empty.'], 400);
             }
             return response()->json(
-                Keyword::where('name', 'LIKE', '%' . $request->search . '%')->get()->take(20)
+                Keyword::where('name', 'LIKE', '%' . $request->q . '%')->get()->take(20)
             );
         } catch (\Exception $e) {
             return ApiHelper::errorHandler($e);
@@ -98,11 +98,11 @@ class SearchController extends Controller
     public function source(Request $request)
     {
         try {
-            if (empty($request->search)) {
-                return response()->json(['message' => 'Search field is empty.'], 400);
+            if (empty($request->q)) {
+                return response()->json(['message' => 'Query field is empty.'], 400);
             }
             return response()->json(
-                Source::where('name', 'LIKE', '%' . $request->search . '%')->get()->take(20)
+                Source::where('name', 'LIKE', '%' . $request->q . '%')->get()->take(20)
             );
         } catch (\Exception $e) {
             return ApiHelper::errorHandler($e);
