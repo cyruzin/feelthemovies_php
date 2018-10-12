@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         try {
-            return response()->json(User::paginate(20));
+            return response()->json(User::orderByDesc('id')->paginate(20));
         } catch (\Exception $e) {
             return ApiHelper::errorHandler($e);
         }

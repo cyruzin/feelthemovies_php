@@ -48,6 +48,7 @@ class RecommendationController extends Controller
         $this->validate($request, [
             'user_id' => 'required',
             'title' => 'required',
+            'type' => 'required',
             'body' => 'required',
             'poster' => 'required',
             'backdrop' => 'required'
@@ -87,6 +88,7 @@ class RecommendationController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'body' => 'required',
+            'type' => 'required',
             'status' => 'required',
             'poster' => 'required',
             'backdrop' => 'required'
