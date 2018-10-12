@@ -27,7 +27,8 @@ class AuthController extends Controller
                 if (Hash::check($request->password, $user->password)) {
                     return response()->json([
                         'message' => 'success',
-                        'api_token' => $user->api_token
+                        'api_token' => $user->api_token,
+                        'id' => $user->id
                     ], 200);
                 }
             }
