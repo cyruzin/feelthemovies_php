@@ -62,6 +62,10 @@ $router->group(['prefix' => '/v1', 'middleware' => 'auth'], function () use ($ro
     $router->delete('/source/{id}', 'SourceController@delete');
 
     // Search Routes
-    $router->get('/search', 'SearchController@index');
+    $router->get('/search_recommendation', 'SearchController@recommendation');
+    $router->get('/search_user', 'SearchController@user');
+    $router->get('/search_genre', 'SearchController@genre');
+    $router->get('/search_keyword', 'SearchController@keyword');
+    $router->get('/search_source', 'SearchController@source');
 
 });

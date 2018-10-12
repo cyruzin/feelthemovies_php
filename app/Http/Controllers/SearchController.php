@@ -3,13 +3,34 @@
 namespace App\Http\Controllers;
 
 use ApiHelper;
+use App\Genre;
+use App\Keyword;
 use App\Recommendation;
+use App\Source;
+use App\User;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
 
-    public function index(Request $request)
+    public function user(Request $request)
+    {
+        try {
+            if (empty($request->search)) {
+                return response()->json(['message' => 'Search field is empty.'], 400);
+            }
+            return response()->json(
+                User::where('name', 'LIKE', '%' . $request->search . '%')
+                    ->orWhere('id', '=', $request->search)
+                    ->get()
+                    ->take(20)
+            );
+        } catch (\Exception $e) {
+            return ApiHelper::errorHandler($e);
+        }
+    }
+
+    public function recommendation(Request $request)
     {
         $search = $request->search;
         $keywords = (!empty($request->keywords)) ? array_filter($request->keywords) : '';
@@ -41,6 +62,48 @@ class SearchController extends Controller
             $rec = $rec->paginate(20);
 
             return response()->json($rec, 200);
+        } catch (\Exception $e) {
+            return ApiHelper::errorHandler($e);
+        }
+    }
+
+    public function genre(Request $request)
+    {
+        try {
+            if (empty($request->search)) {
+                return response()->json(['message' => 'Search field is empty.'], 400);
+            }
+            return response()->json(
+                Genre::where('name', 'LIKE', '%' . $request->search . '%')->get()->take(20)
+            );
+        } catch (\Exception $e) {
+            return ApiHelper::errorHandler($e);
+        }
+    }
+
+    public function keyword(Request $request)
+    {
+        try {
+            if (empty($request->search)) {
+                return response()->json(['message' => 'Search field is empty.'], 400);
+            }
+            return response()->json(
+                Keyword::where('name', 'LIKE', '%' . $request->search . '%')->get()->take(20)
+            );
+        } catch (\Exception $e) {
+            return ApiHelper::errorHandler($e);
+        }
+    }
+
+    public function source(Request $request)
+    {
+        try {
+            if (empty($request->search)) {
+                return response()->json(['message' => 'Search field is empty.'], 400);
+            }
+            return response()->json(
+                Source::where('name', 'LIKE', '%' . $request->search . '%')->get()->take(20)
+            );
         } catch (\Exception $e) {
             return ApiHelper::errorHandler($e);
         }
