@@ -49,7 +49,9 @@ class RecommendationController extends Controller
             'user_id' => 'required',
             'title' => 'required',
             'type' => 'required',
-            'body' => 'required'
+            'body' => 'required',
+            'poster' => 'required',
+            'backdrop' => 'required'
         ]);
 
         try {
