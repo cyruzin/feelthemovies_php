@@ -55,7 +55,17 @@ class RecommendationController extends Controller
         ]);
 
         try {
-            $recommendation = Recommendation::create($request->all());
+           // $recommendation = Recommendation::create($request->all());
+
+            $recommendation = new Recommendation();
+
+            $recommendation->title = $request->title;
+            $recommendation->body = $request->body;
+            $recommendation->type = $request->type;
+            $recommendation->poster = $request->poster;
+            $recommendation->backdrop = $request->backdrop;
+            $recommendation->user_id = $request->user_id;
+            $recommendation->save();
 
             $genres = array_filter($request->genres);
             $keywords = array_filter($request->keywords);
@@ -97,7 +107,16 @@ class RecommendationController extends Controller
         try {
             $recommendation = Recommendation::findOrFail($id);
 
-            $recommendation->update($request->all());
+            $recommendation->title = $request->title;
+            $recommendation->body = $request->body;
+            $recommendation->type = $request->type;
+            $recommendation->status = $request->status;
+            $recommendation->poster = $request->poster;
+            $recommendation->backdrop = $request->backdrop;
+            $recommendation->user_id = $request->user_id;
+            $recommendation->save();
+
+            //$recommendation->update($request->all());
 
             $genres = array_filter($request->genres);
             $keywords = array_filter($request->keywords);
