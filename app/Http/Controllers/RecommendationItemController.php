@@ -54,6 +54,7 @@ class RecommendationItemController extends Controller
             'overview' => 'required',
             'poster' => 'required',
             'backdrop' => 'required',
+            'sources' => 'array'
         ]);
 
         try {
@@ -88,6 +89,7 @@ class RecommendationItemController extends Controller
             'overview' => 'required',
             'poster' => 'required',
             'backdrop' => 'required',
+            'sources' => 'array'
         ]);
 
         try {

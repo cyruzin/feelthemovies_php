@@ -51,7 +51,9 @@ class RecommendationController extends Controller
             'type' => 'required',
             'body' => 'required',
             'poster' => 'required',
-            'backdrop' => 'required'
+            'backdrop' => 'required',
+            'genres' => 'array',
+            'keywords' => 'array'
         ]);
 
         try {
@@ -101,7 +103,9 @@ class RecommendationController extends Controller
             'type' => 'required',
             'status' => 'required',
             'poster' => 'required',
-            'backdrop' => 'required'
+            'backdrop' => 'required',
+            'genres' => 'array',
+            'keywords' => 'array'
         ]);
 
         try {
