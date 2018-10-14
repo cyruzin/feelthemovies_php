@@ -17,9 +17,9 @@ class RecommendationItemController extends Controller
     public function index($id)
     {
         try {
-            return response()->json(RecommendationItem::with('sources')
-                ->get()
-                ->where('recommendation_id', $id), 200);
+            return response()->json(['data' => RecommendationItem::with('sources')
+                ->where('recommendation_id', $id)
+                ->get()], 200);
         } catch (\Exception $e) {
             return ApiHelper::errorHandler($e);
         }
