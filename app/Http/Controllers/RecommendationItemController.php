@@ -50,6 +50,7 @@ class RecommendationItemController extends Controller
         $this->validate($request, [
             'recommendation_id' => 'required',
             'name' => 'required',
+            'movie_id' => 'required',
             'year' => 'required',
             'overview' => 'required',
             'poster' => 'required',
@@ -85,6 +86,7 @@ class RecommendationItemController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+            'movie_id' => 'required',
             'year' => 'required',
             'overview' => 'required',
             'poster' => 'required',

@@ -37,6 +37,7 @@ $factory->define(App\RecommendationItem::class, function (Faker\Generator $faker
     return [
         'recommendation_id' => $faker->numberBetween($min = 1, $max = 50),
         'name' => $faker->name,
+        'movie_id' => $faker->numberBetween($min = 1, $max = 5000),
         'year' => $faker->date($format = 'Y-m-d', $max = 'now'),
         'overview' => $faker->text($maxNbChars = 400),
         'poster' => str_random(20),

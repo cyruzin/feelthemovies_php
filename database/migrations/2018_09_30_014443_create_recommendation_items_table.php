@@ -17,6 +17,7 @@ class CreateRecommendationItemsTable extends Migration
             $table->increments('id');
             $table->integer('recommendation_id')->unsigned();
             $table->string('name');
+            $table->integer('movie_id');
             $table->date('year');
             $table->text('overview');
             $table->string('poster');
