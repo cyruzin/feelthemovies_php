@@ -9,13 +9,19 @@ use Illuminate\Http\Request;
 class RecommendationController extends Controller
 {
     /**
+     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
-     * @throws \Exception
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
+            if (!empty($request->nofilter) && $request->nofilter) {
+                return response()->json(Recommendation::with(['genres', 'keywords'])
+                    ->orderByDesc('id')
+                    ->paginate(20));
+            }
             return response()->json(Recommendation::with(['genres', 'keywords'])
+                ->where('status', '=', 1)
                 ->orderByDesc('id')
                 ->paginate(20));
         } catch (\Exception $e) {
@@ -57,7 +63,7 @@ class RecommendationController extends Controller
         ]);
 
         try {
-           // $recommendation = Recommendation::create($request->all());
+            // $recommendation = Recommendation::create($request->all());
 
             $recommendation = new Recommendation();
 
