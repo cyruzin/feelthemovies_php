@@ -15,7 +15,7 @@ class RecommendationController extends Controller
     public function index(Request $request)
     {
         try {
-            if (!empty($request->nofilter) && $request->nofilter) {
+            if (!empty($request->nofilter) && $request->nofilter == 'true') {
                 return response()->json(Recommendation::with(['genres', 'keywords'])
                     ->orderByDesc('id')
                     ->paginate(20));
