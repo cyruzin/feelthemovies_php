@@ -32,34 +32,30 @@ class SearchController extends Controller
 
     public function recommendation(Request $request)
     {
-        $search = $request->q;
-        $keywords = (!empty($request->keywords)) ? array_filter($request->keywords) : '';
-        $genres = (!empty($request->genres)) ? array_filter($request->genres) : '';
+        $this->validate($request, [
+            'q' => 'required'
+        ]);
 
-        if (empty($search) && empty($keywords) && empty($genres)) {
-            return response()->json(['message' => 'All fields are empty.'], 400);
-        }
+        $search = $request->q;
 
         try {
             $rec = Recommendation::with(['keywords', 'genres']);
 
-            if (!empty($search)) {
-                $rec->where('title', 'LIKE', '%' . $search . '%');
+            $rec->where('title', 'LIKE', '%' . $search . '%');
+
+            if (empty($request->nofilter)) {
+                $rec->where('status', '=', 1);
             }
 
-            if (!empty($keywords)) {
-                $rec->whereHas('keywords', function ($query) use ($keywords) {
-                    $query->whereIn('keyword_id', $keywords);
-                });
-            }
+            $rec->orWhereHas('keywords', function ($query) use ($search) {
+                $query->where('name', 'LIKE', '%' . $search . '%');
+            });
 
-            if (!empty($genres)) {
-                $rec->whereHas('genres', function ($query) use ($genres) {
-                    $query->whereIn('genre_id', $genres);
-                });
-            }
+            $rec->orWhereHas('genres', function ($query) use ($search) {
+                $query->where('name', 'LIKE', '%' . $search . '%');
+            });
 
-            $rec = $rec->paginate(20);
+            $rec = $rec->get()->take(20);
 
             return response()->json($rec, 200);
         } catch (\Exception $e) {
