@@ -43,23 +43,38 @@ class SearchController extends Controller
 
             $rec->where('title', 'LIKE', '%' . $search . '%');
 
-            if (isset($request->type)) {
-                $rec->where('type', $request->type);
+            if ($request->has('type')) {
+                $rec->where('type', intval($request->type));
             }
 
-            if (!isset($request->nofilter)) {
-                $rec->where('status', '=', 1);
+            if (!$request->has('nofilter')) {
+                $rec->where('status', 1);
             }
 
-            $rec->orWhereHas('keywords', function ($query) use ($search) {
+            $rec->orWhereHas('keywords', function ($query) use ($search, $request) {
+                if ($request->has('type')) {
+                    $query->where('type', intval($request->type));
+                }
+
+                if (!$request->has('nofilter')) {
+                    $query->where('status', 1);
+                }
                 $query->where('name', 'LIKE', '%' . $search . '%');
             });
 
-            $rec->orWhereHas('genres', function ($query) use ($search) {
+            $rec->orWhereHas('genres', function ($query) use ($search, $request) {
+                if ($request->has('type')) {
+                    $query->where('type', intval($request->type));
+                }
+
+                if (!$request->has('nofilter')) {
+                    $query->where('status', 1);
+                }
                 $query->where('name', 'LIKE', '%' . $search . '%');
             });
 
             $rec = $rec->get()->take(20);
+
 
             return response()->json($rec, 200);
         } catch (\Exception $e) {
