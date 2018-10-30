@@ -43,10 +43,11 @@ class SearchController extends Controller
 
             $rec->where('title', 'LIKE', '%' . $search . '%');
 
-            if (!empty($request->type)) {
-                $rec->where('type', '=', $request->type);
+            if (isset($request->type)) {
+                $rec->where('type', $request->type);
             }
-            if (empty($request->nofilter)) {
+
+            if (!isset($request->nofilter)) {
                 $rec->where('status', '=', 1);
             }
 
