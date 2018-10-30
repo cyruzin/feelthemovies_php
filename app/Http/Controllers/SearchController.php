@@ -33,8 +33,7 @@ class SearchController extends Controller
     public function recommendation(Request $request)
     {
         $this->validate($request, [
-            'q' => 'required',
-            'type' => 'required'
+            'q' => 'required'
         ]);
 
         $search = $request->q;
@@ -44,8 +43,9 @@ class SearchController extends Controller
 
             $rec->where('title', 'LIKE', '%' . $search . '%');
 
-            $rec->where('type', '=', $request->type);
-
+            if (!empty($request->type)) {
+                $rec->where('type', '=', $request->type);
+            }
             if (empty($request->nofilter)) {
                 $rec->where('status', '=', 1);
             }
