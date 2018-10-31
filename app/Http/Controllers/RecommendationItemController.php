@@ -50,7 +50,7 @@ class RecommendationItemController extends Controller
         $this->validate($request, [
             'recommendation_id' => 'required',
             'name' => 'required',
-            'movie_id' => 'required',
+            'tmdb_id' => 'required',
             'year' => 'required',
             'overview' => 'required',
             'poster' => 'required',
@@ -59,7 +59,20 @@ class RecommendationItemController extends Controller
         ]);
 
         try {
-            $recommendationItem = RecommendationItem::create($request->all());
+//            $recommendationItem = RecommendationItem::create($request->all());
+
+            $recommendationItem = new RecommendationItem();
+
+            $recommendationItem->recommendation_id = $request->recommendation_id;
+            $recommendationItem->name = $request->name;
+            $recommendationItem->tmdb_id = $request->tmdb_id;
+            $recommendationItem->year = $request->year;
+            $recommendationItem->overview = $request->overview;
+            $recommendationItem->poster = $request->poster;
+            $recommendationItem->backdrop = $request->backdrop;
+            $recommendationItem->trailer = $request->trailer;
+            $recommendationItem->commentary = $request->commentary;
+            $recommendationItem->save();
 
             $sources = array_filter($request->sources);
 
@@ -86,7 +99,7 @@ class RecommendationItemController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'movie_id' => 'required',
+            'tmdb_id' => 'required',
             'year' => 'required',
             'overview' => 'required',
             'poster' => 'required',
@@ -96,7 +109,18 @@ class RecommendationItemController extends Controller
 
         try {
             $recommendationItem = RecommendationItem::findOrFail($id);
-            $recommendationItem->update($request->all());
+           // $recommendationItem->update($request->all());
+
+            $recommendationItem->recommendation_id = $request->recommendation_id;
+            $recommendationItem->name = $request->name;
+            $recommendationItem->tmdb_id = $request->tmdb_id;
+            $recommendationItem->year = $request->year;
+            $recommendationItem->overview = $request->overview;
+            $recommendationItem->poster = $request->poster;
+            $recommendationItem->backdrop = $request->backdrop;
+            $recommendationItem->trailer = $request->trailer;
+            $recommendationItem->commentary = $request->commentary;
+            $recommendationItem->save();
 
             $sources = array_filter($request->sources);
 
