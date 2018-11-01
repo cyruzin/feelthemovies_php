@@ -70,6 +70,7 @@ class RecommendationItemController extends Controller
             $recommendationItem->overview = $request->overview;
             $recommendationItem->poster = $request->poster;
             $recommendationItem->backdrop = $request->backdrop;
+            $recommendationItem->media_type = $request->media_type;
             $recommendationItem->trailer = $request->trailer;
             $recommendationItem->commentary = $request->commentary;
             $recommendationItem->save();
@@ -118,6 +119,7 @@ class RecommendationItemController extends Controller
             $recommendationItem->overview = $request->overview;
             $recommendationItem->poster = $request->poster;
             $recommendationItem->backdrop = $request->backdrop;
+            $recommendationItem->media_type = $request->media_type;
             $recommendationItem->trailer = $request->trailer;
             $recommendationItem->commentary = $request->commentary;
             $recommendationItem->save();
