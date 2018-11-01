@@ -55,6 +55,7 @@ class RecommendationItemController extends Controller
             'overview' => 'required',
             'poster' => 'required',
             'backdrop' => 'required',
+            'media_type' => 'required',
             'sources' => 'array'
         ]);
 
@@ -105,6 +106,7 @@ class RecommendationItemController extends Controller
             'overview' => 'required',
             'poster' => 'required',
             'backdrop' => 'required',
+            'media_type' => 'required',
             'sources' => 'array'
         ]);
 
