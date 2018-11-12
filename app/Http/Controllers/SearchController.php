@@ -73,7 +73,7 @@ class SearchController extends Controller
                 $query->where('name', 'LIKE', '%' . $search . '%');
             });
 
-            $rec = $rec->get()->take(20);
+            $rec = $rec->orderByDesc('id')->get()->take(20);
 
 
             return response()->json($rec, 200);
