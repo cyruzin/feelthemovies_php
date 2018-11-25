@@ -23,7 +23,7 @@ class RecommendationController extends Controller
             return response()->json(Recommendation::with(['genres', 'keywords'])
                 ->where('status', '=', 1)
                 ->orderByDesc('id')
-                ->paginate(20));
+                ->paginate(10));
         } catch (\Exception $e) {
             return ApiHelper::errorHandler($e);
         }
