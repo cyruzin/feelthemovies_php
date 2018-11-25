@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\RecommendationItem;
 use ApiHelper;
+use App\RecommendationItem;
 use Illuminate\Http\Request;
 
 class RecommendationItemController extends Controller
@@ -60,7 +60,6 @@ class RecommendationItemController extends Controller
         ]);
 
         try {
-//            $recommendationItem = RecommendationItem::create($request->all());
 
             $recommendationItem = new RecommendationItem();
 
@@ -112,7 +111,6 @@ class RecommendationItemController extends Controller
 
         try {
             $recommendationItem = RecommendationItem::findOrFail($id);
-           // $recommendationItem->update($request->all());
 
             $recommendationItem->recommendation_id = $request->recommendation_id;
             $recommendationItem->name = $request->name;
@@ -126,11 +124,7 @@ class RecommendationItemController extends Controller
             $recommendationItem->commentary = $request->commentary;
             $recommendationItem->save();
 
-            $sources = array_filter($request->sources);
-
-            if (!empty($sources)) {
-                $recommendationItem->sources()->sync($request->sources);
-            }
+            $recommendationItem->sources()->sync($request->sources);
 
             $recommendationItem = RecommendationItem::with('sources')->findOrFail($id);
 
