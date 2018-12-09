@@ -119,8 +119,8 @@ class RecommendationController extends Controller
             $recommendation_item = RecommendationItem::where('recommendation_id', $id)->count();
 
             if(
-                $recommendation_item === 0 &&
-                $request->status === 1
+                $recommendation_item == 0 &&
+                $request->status == 1
 
             ) {
                 return response()->json(['error' => 'You can not activate an empty recommendation.'], 400);
