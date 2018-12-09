@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Recommendation;
 use ApiHelper;
+use App\RecommendationItem;
 use Illuminate\Http\Request;
 
 class RecommendationController extends Controller
@@ -115,6 +116,16 @@ class RecommendationController extends Controller
         ]);
 
         try {
+            $recommendation_item = RecommendationItem::where('recommendation_id', $id)->count();
+
+            if(
+                $recommendation_item === 0 &&
+                $request->status === 1
+
+            ) {
+                return response()->json(['error' => 'You can not activate an empty recommendation.'], 400);
+            }
+
             $recommendation = Recommendation::findOrFail($id);
 
             $recommendation->title = $request->title;
